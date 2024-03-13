@@ -251,10 +251,11 @@ class Nemati(OpticalSystem):
         with np.errstate(divide="ignore", invalid="ignore"):
             if mode["syst"]["occulter"] is False:
                 intTime = np.true_divide(
-                    SNR**2.0 * C_b, (C_p**2.0 - (SNR * C_sp) ** 2.0)
-                ).to("day")
+                    mode["timeMultiplier"] * SNR**2.0 * C_b,
+                    (C_p**2.0 - (SNR * C_sp) ** 2.0)).to("day")
             else:
-                intTime = np.true_divide(SNR**2.0 * C_b, (C_p**2.0)).to("day")
+                intTime = np.true_divide(mode["timeMultiplier"] *
+                                         SNR**2.0 * C_b, (C_p**2.0)).to("day")
         # infinite and NAN are set to zero
         intTime[np.isinf(intTime) | np.isnan(intTime)] = np.nan
         # negative values are set to zero
