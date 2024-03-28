@@ -150,6 +150,7 @@ class TestOpticalSystem(unittest.TestCase):
         """
         Check that the timeMultiplier is respected.
         """
+
         for mod in self.allmods:
             if "calc_intTime" not in mod.__dict__:
                 continue
